@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REEs: 희토류 - 미래 첨단 산업의 심장</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Pretendard:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg-dark: #07090e;
+            --bg-card: rgba(17, 22, 34, 0.65);
+            --border-glow: rgba(0, 242, 254, 0.15);
+            --accent-cyan: #00f2fe;
+            --accent-purple: #4facfe;
+            --accent-gold: #ffd700;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-glow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.7;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(79, 172, 254, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                linear-gradient(rgba(7, 9, 14, 0.95), rgba(7, 9, 14, 0.95)),
+                radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
+            background-attachment: fixed;
+        }
+
+        .glowing-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.25;
+            animation: float 20s infinite alternate;
+        }
+
+        .orb-1 {
+            top: 10%;
+            left: 15%;
+            width: 350px;
+            height: 350px;
+            background: var(--accent-cyan);
+        }
+
+        .orb-2 {
+            bottom: 15%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: #9b51e0;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 40px) scale(1.1); }
+        }
+
+        header {
+            position: relative;
+            padding: 8rem 2rem 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: radial-gradient(ellipse at bottom, rgba(17, 24, 39, 0.6), transparent);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* ===== Main Tab Navigation ===== */
+        .main-tabs {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 1.2rem 1rem;
+            background: rgba(7, 9, 14, 0.75);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-glow);
+            flex-wrap: wrap;
+        }
+
+        .main-tab-btn {
+            font-family: 'Pretendard', sans-serif;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            padding: 0.85rem 1.8rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .main-tab-btn:hover {
+            border-color: var(--accent-cyan);
+            color: #fff;
+        }
+
+        .main-tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: #07090e;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .periodic-dashboard {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            margin-bottom: 4rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 850px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .periodic-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+
+        .element-cell {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .element-cell:hover, .element-cell.active {
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+            transform: scale(1.05);
+        }
+
+        .element-cell .num {
+            font-size: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-muted);
+        }
+
+        .element-cell .sym {
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .element-cell .name-kr {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .element-cell.highlight-nd { border-color: var(--accent-gold); color: var(--accent-gold); }
+        .element-cell.highlight-ce { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .element-cell.highlight-tb { border-color: #d946ef; color: #d946ef; }
+
+        .dashboard-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid rgba(255,255,255,0.08);
+            padding-left: 2rem;
+        }
+
+        @media (max-width: 850px) {
+            .dashboard-details {
+                border-left: none;
+                padding-left: 0;
+                padding-top: 2rem;
+                border-top: 1px solid rgba(255,255,255,0.08);
+            }
+        }
+
+        .detail-card {
+            display: none;
+        }
+
+        .detail-card.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-sym-box {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+        }
+
+        .detail-title h3 {
+            font-size: 1.6rem;
+            color: #fff;
+        }
+
+        .detail-title p {
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .detail-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .spec-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 0.8rem;
+            border-radius: 8px;
+        }
+
+        .spec-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .spec-val {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 0.2rem;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .chart-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .chart-tab {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-muted);
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .chart-tab:hover, .chart-tab.active {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: #07090e;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            font-weight: 700;
+        }
+
+        .modern-chart-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: 140px 1fr 80px;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .chart-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .chart-row-val {
+                text-align: right;
+            }
+        }
+
+        .chart-row-label {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.05rem;
+        }
+
+        .chart-row-bar-bg {
+            background: rgba(255,255,255,0.05);
+            height: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .chart-row-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            width: 0%;
+            border-radius: 8px;
+            transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .chart-row-bar-fill.china {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            box-shadow: 0 0 10px rgba(255, 65, 108, 0.4);
+        }
+
+        .chart-row-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            text-align: right;
+        }
+
+        .geo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .geo-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .geo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-cyan), transparent);
+        }
+
+        .geo-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.08);
+        }
+
+        .geo-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .geo-card h3 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .geo-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer p span {
+            color: var(--accent-cyan);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* ================================================================
+           GAME TAB — all rules scoped under #tab-game so they never leak
+           into the dashboard tab. Variable names are prefixed with --g-
+           to avoid clashing with the dashboard's --text-main / --text-muted.
+           ================================================================ */
+        #tab-game {
+            --g-primary: #8b5cf6;
+            --g-success: #10b981;
+            --g-danger: #ef4444;
+            --g-background: #090a0f;
+            --g-card-bg: #151824;
+            --g-text-main: #f3f4f6;
+            --g-text-muted: #9ca3af;
+            --g-space-glow: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #090a0f 100%);
+
+            position: relative;
+            background: var(--g-background);
+            background-image: var(--g-space-glow);
+            color: var(--g-text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 60px 20px;
+            overflow: hidden;
+        }
+
+        #tab-game * {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        #tab-game::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            opacity: 0.25;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #tab-game #game-header {
+            text-align: center;
+            margin-bottom: 20px;
+            z-index: 1;
+            position: relative;
+            padding: 0;
+            border-bottom: none;
+            background: none;
+        }
+
+        #tab-game #game-header h1 {
+            font-size: 1.8rem;
+            color: #c084fc;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+            background: none;
+            -webkit-text-fill-color: #c084fc;
+        }
+
+        #tab-game #game-header p {
+            font-size: 0.9rem;
+            color: var(--g-text-muted);
+            max-width: none;
+        }
+
+        #tab-game #game-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        #tab-game .card-zone {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #tab-game .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--g-card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(139, 92, 246, 0.1);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.2s ease, background-color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid rgba(255, 255, 255, 0.05);
+            touch-action: none;
+        }
+
+        #tab-game .card:active {
+            cursor: grabbing;
+        }
+
+        #tab-game .card .badge {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #d8b4fe;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        #tab-game .card .statement {
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.6;
+            word-break: keep-all;
+            color: #ffffff;
+        }
+
+        #tab-game #feedback-panel {
+            width: 100%;
+            margin-top: 20px;
+            background-color: var(--g-card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 2;
+        }
+
+        #tab-game #feedback-panel.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #tab-game .feedback-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        #tab-game .feedback-title.correct {
+            color: var(--g-success);
+            text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+        }
+
+        #tab-game .feedback-title.wrong {
+            color: var(--g-danger);
+            text-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+        }
+
+        #tab-game .feedback-reason {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d1d5db;
+            word-break: keep-all;
+        }
+
+        #tab-game .controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+            width: 100%;
+        }
+
+        #tab-game .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.1s ease, filter 0.2s ease, box-shadow 0.2s ease;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        #tab-game .btn:active {
+            transform: scale(0.95);
+        }
+
+        #tab-game .btn-fake {
+            background-color: var(--g-danger);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+        }
+
+        #tab-game .btn-real {
+            background-color: var(--g-success);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+        }
+
+        #tab-game .btn-next {
+            background-color: var(--g-primary);
+            width: 100%;
+            margin-top: 15px;
+            display: none;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        #tab-game #result-screen {
+            display: none;
+            text-align: center;
+            background: var(--g-card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(139, 92, 246, 0.2);
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1;
+        }
+
+        #tab-game #result-screen h2 {
+            font-size: 2rem;
+            color: #c084fc;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        #tab-game .score-box {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--g-text-main);
+            margin: 20px 0;
+        }
+
+        #tab-game .score-box span {
+            color: #c084fc;
+            text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        #tab-game .btn-restart {
+            background-color: var(--g-primary);
+            margin-top: 10px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        #tab-game .swipe-left {
+            transform: translate(-150%, -50px) rotate(-20deg) !important;
+            opacity: 0;
+        }
+
+        #tab-game .swipe-right {
+            transform: translate(150%, -50px) rotate(20deg) !important;
+            opacity: 0;
+        }
+
+        #tab-game .card.react-correct {
+            border-color: var(--g-success);
+            background-color: #064e3b;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+        }
+
+        #tab-game .card.react-wrong {
+            border-color: var(--g-danger);
+            background-color: #7f1d1d;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+        }
+
+        #tab-game #progress-container {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        #tab-game #progress-bar {
+            height: 100%;
+            background-color: #c084fc;
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px rgba(192, 132, 252, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient glowing orbs in background -->
+    <div class="glowing-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header>
+        <div class="hero-badge">Critical Materials Strategic Insight</div>
+        <h1>글로벌 패권의 열쇠, <span>희토류 (REEs)</span></h1>
+        <p>현대 디바이스의 세포이자, 4차 산업혁명의 주도권을 결정하는 미래 에너지 생태계의 마법의 가루</p>
+    </header>
+
+    <!-- ===== Main Tab Navigation ===== -->
+    <nav class="main-tabs">
+        <button class="main-tab-btn active" id="btn-tab-info" onclick="switchMainTab('info')">📊 정보 대시보드</button>
+        <button class="main-tab-btn" id="btn-tab-game" onclick="switchMainTab('game')">🎮 팩트체크 스와이프 게임</button>
+    </nav>
+
+    <!-- ===== TAB 1: INFO DASHBOARD ===== -->
+    <div class="tab-panel active" id="tab-info">
+    <div class="container">
+        
+        <!-- SECTION 1: INTRODUCTION & PERIODIC CONCEPT -->
+        <section>
+            <div class="section-header">
+                <h2>희토류 원소 사전</h2>
+                <p>스칸듐(Sc), 이트륨(Y) 및 란타넘족 15개 원소를 포함한 총 17개의 보석 같은 원소들을 터치해보세요.</p>
+            </div>
+
+            <div class="periodic-dashboard">
+                <div class="dashboard-grid">
+                    
+                    <!-- Periodic Mini Grid Interactive -->
+                    <div class="periodic-mini-grid">
+                        <div class="element-cell" onclick="showElement('sc')">
+                            <span class="num">21</span>
+                            <span class="sym">Sc</span>
+                            <span class="name-kr">스칸듐</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('y')">
+                            <span class="num">39</span>
+                            <span class="sym">Y</span>
+                            <span class="name-kr">이트륨</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('la')">
+                            <span class="num">57</span>
+                            <span class="sym">La</span>
+                            <span class="name-kr">란타넘</span>
+                        </div>
+                        <div class="element-cell highlight-ce active" onclick="showElement('ce')">
+                            <span class="num">58</span>
+                            <span class="sym">Ce</span>
+                            <span class="name-kr">세륨</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('pr')">
+                            <span class="num">59</span>
+                            <span class="sym">Pr</span>
+                            <span class="name-kr">프라세오디뮴</span>
+                        </div>
+                        <div class="element-cell highlight-nd" onclick="showElement('nd')">
+                            <span class="num">60</span>
+                            <span class="sym">Nd</span>
+                            <span class="name-kr">네오디뮴</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('pm')">
+                            <span class="num">61</span>
+                            <span class="sym">Pm</span>
+                            <span class="name-kr">프로메튬</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('sm')">
+                            <span class="num">62</span>
+                            <span class="sym">Sm</span>
+                            <span class="name-kr">사마륨</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('eu')">
+                            <span class="num">63</span>
+                            <span class="sym">Eu</span>
+                            <span class="name-kr">유로퓸</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('gd')">
+                            <span class="num">64</span>
+                            <span class="sym">Gd</span>
+                            <span class="name-kr">가돌리늄</span>
+                        </div>
+                        <div class="element-cell highlight-tb" onclick="showElement('tb')">
+                            <span class="num">65</span>
+                            <span class="sym">Tb</span>
+                            <span class="name-kr">터븀</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('dy')">
+                            <span class="num">66</span>
+                            <span class="sym">Dy</span>
+                            <span class="name-kr">디스프로슘</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('ho')">
+                            <span class="num">67</span>
+                            <span class="sym">Ho</span>
+                            <span class="name-kr">홀뮴</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('er')">
+                            <span class="num">68</span>
+                            <span class="sym">Er</span>
+                            <span class="name-kr">어븀</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('tm')">
+                            <span class="num">69</span>
+                            <span class="sym">Tm</span>
+                            <span class="name-kr">툴륨</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('yb')">
+                            <span class="num">70</span>
+                            <span class="sym">Yb</span>
+                            <span class="name-kr">이터븀</span>
+                        </div>
+                        <div class="element-cell" onclick="showElement('lu')">
+                            <span class="num">71</span>
+                            <span class="sym">Lu</span>
+                            <span class="name-kr">루테튬</span>
+                        </div>
+                    </div>
+
+                    <!-- Details Display Panel -->
+                    <div class="dashboard-details">
+                        <!-- Cerium Detail (Default Active) -->
+                        <div class="detail-card active" id="detail-ce">
+                            <div class="detail-header">
+                                <div class="detail-sym-box">Ce</div>
+                                <div class="detail-title">
+                                    <h3>세륨 (Cerium)</h3>
+                                    <p>Atomic Number 58</p>
+                                </div>
+                            </div>
+                            <p class="detail-desc">란타넘족 원소 중 지구상에 가장 풍부한 원소입니다. 반도체 표면을 원자 수준 극미세 단위로 오차 없이 완벽하게 평탄화(CMP 공정)하기 위해 사용되는 반도체 전공정 핵심 소재입니다.</p>
+                            <div class="detail-specs">
+                                <div class="spec-item"><div class="spec-label">주 사용처</div><div class="spec-val">반도체 CMP 연마재</div></div>
+                                <div class="spec-item"><div class="spec-label">특징</div><div class="spec-val">극강의 나노 미세 가공</div></div>
+                            </div>
+                        </div>
+
+                        <!-- Neodymium Detail -->
+                        <div class="detail-card" id="detail-nd">
+                            <div class="detail-header">
+                                <div class="detail-sym-box" style="border-color: var(--accent-gold);">Nd</div>
+                                <div class="detail-title">
+                                    <h3 style="color: var(--accent-gold);">네오디뮴 (Neodymium)</h3>
+                                    <p style="color: var(--accent-gold);">Atomic Number 60</p>
+                                </div>
+                            </div>
+                            <p class="detail-desc">지구상에서 존재하는 인공 영구자석 중 가장 가벼우면서도 초강력한 자력을 발생시키는 핵심 소스입니다. 전기차 모터와 스마트폰 진동 시스템에 필수로 대체 불가능합니다.</p>
+                            <div class="detail-specs">
+                                <div class="spec-item"><div class="spec-label">주 사용처</div><div class="spec-val">전기차 모터, 고성능 스피커</div></div>
+                                <div class="spec-item"><div class="spec-label">특징</div><div class="spec-val">초강력 영구자석 제조</div></div>
+                            </div>
+                        </div>
+
+                        <!-- Terbium Detail -->
+                        <div class="detail-card" id="detail-tb">
+                            <div class="detail-header">
+                                <div class="detail-sym-box" style="border-color: #d946ef;">Tb</div>
+                                <div class="detail-title">
+                                    <h3 style="color: #d946ef;">터븀 (Terbium)</h3>
+                                    <p style="color: #d946ef;">Atomic Number 65</p>
+                                </div>
+                            </div>
+                            <p class="detail-desc">백색 광원 및 디스플레이에서 고순도의 선명한 녹색 빛을 방사하는 형광 물질입니다. 뛰어난 발광 특성 덕분에 프리미엄 LED TV 스크린 및 차세대 디스플레이에 주로 활용됩니다.</p>
+                            <div class="detail-specs">
+                                <div class="spec-item"><div class="spec-label">주 사용처</div><div class="spec-val">LED, 고화질 디스플레이</div></div>
+                                <div class="spec-item"><div class="spec-label">특징</div><div class="spec-val">선명한 색상 구현성</div></div>
+                            </div>
+                        </div>
+
+                        <!-- Default Other Elements Card -->
+                        <div class="detail-card" id="detail-other">
+                            <div class="detail-header">
+                                <div class="detail-sym-box" style="border-color: var(--text-muted);">REE</div>
+                                <div class="detail-title">
+                                    <h3>기타 희토류 원소</h3>
+                                    <p>Rare Earth Elements Group</p>
+                                </div>
+                            </div>
+                            <p class="detail-desc" id="other-desc">희토류는 주기율표의 독특한 전자 구조를 지니고 있어 아주 미량만 섞어도 최종 복합재의 성질을 극대화시켜주는 역할을 합니다. 초전도체, 신소재 합금, 우주항공 등 미지의 영역에 필수입니다.</p>
+                            <div class="detail-specs">
+                                <div class="spec-item"><div class="spec-label">주 사용처</div><div class="spec-val" id="other-use">우주공학, 첨단 레이저</div></div>
+                                <div class="spec-item"><div class="spec-label">특징</div><div class="spec-val">대체 물질 탐색 불가</div></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: INTERACTIVE CHART -->
+        <section>
+            <div class="section-header">
+                <h2>글로벌 편중도 데이터</h2>
+                <p>왜 희토류는 특정 국가에 강력하게 종속되어 있는 걸까요? 세 가지 세부 영역을 선택하여 확인하세요.</p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-nav">
+                    <button class="chart-tab active" onclick="changeDataset('reserves')">글로벌 매장량 (%)</button>
+                    <button class="chart-tab" onclick="changeDataset('production')">글로벌 생산량 (%)</button>
+                    <button class="chart-tab" onclick="changeDataset('refining')">정제 및 가공 (%)</button>
+                </div>
+
+                <div class="modern-chart-body">
+                    <div class="chart-row">
+                        <div class="chart-row-label">중국 (China)</div>
+                        <div class="chart-row-bar-bg">
+                            <div id="bar-fill-china" class="chart-row-bar-fill china"></div>
+                        </div>
+                        <div id="val-fill-china" class="chart-row-val">0%</div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div class="chart-row-label">브라질 (Brazil)</div>
+                        <div class="chart-row-bar-bg">
+                            <div id="bar-fill-brazil" class="chart-row-bar-fill"></div>
+                        </div>
+                        <div id="val-fill-brazil" class="chart-row-val">0%</div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div class="chart-row-label">호주 (Australia)</div>
+                        <div class="chart-row-bar-bg">
+                            <div id="bar-fill-australia" class="chart-row-bar-fill"></div>
+                        </div>
+                        <div id="val-fill-australia" class="chart-row-val">0%</div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div class="chart-row-label">기타 (Others)</div>
+                        <div class="chart-row-bar-bg">
+                            <div id="bar-fill-others" class="chart-row-bar-fill"></div>
+                        </div>
+                        <div id="val-fill-others" class="chart-row-val">0%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: GEOPOLITICS -->
+        <section>
+            <div class="section-header">
+                <h2>희토류를 둘러싼 패권과 협력</h2>
+                <p>글로벌 지정학적 핵심 축으로 부상한 희토류를 바라보는 국가들의 각축전</p>
+            </div>
+
+            <div class="geo-grid">
+                <div class="geo-card">
+                    <div class="geo-icon">🔴</div>
+                    <h3>중국의 '자원 무기화' 전략</h3>
+                    <p>중국은 전 세계 매장량의 약 48%를 차지하며, 정밀 정제·가공 분야의 90% 이상을 틀어쥐고 있습니다. 가공 인프라의 독점력을 활용하여 국가 간 외교 긴장 시 수출을 통제하거나 승인을 제한하는 가장 강력한 외교 카드로 꺼내듭니다.</p>
+                </div>
+
+                <div class="geo-card">
+                    <h3>미국과 우방국들의 '디커플링'</h3>
+                    <p>자원 독점으로 인한 공급망 마비 사태를 방지하기 위해 미국, 한국, 호주 등은 공급라인을 자국 내 혹은 신뢰 동맹국 위주로 개편(프렌드쇼어링)하고 정제 기술 개발에 대규모 정부 보조금을 쏟아붓고 있습니다.</p>
+                </div>
+
+                <div class="geo-card">
+                    <div class="geo-icon">♻️</div>
+                    <h3>도시 광산과 친환경 솔루션</h3>
+                    <p>중국 편중을 해결하기 위해, 수명을 다한 IT 제품의 배터리와 고성능 자석에서 친환경 공정으로 희토류를 재활용하는 '도시 광산' 기술이 활발히 연구되고 있으며, 영구자석이 들어가지 않는 모터 등 원천적 대체 기술 개발 또한 속도를 내고 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    </div>
+    <!-- ===== END TAB 1 ===== -->
+
+    <!-- ===== TAB 2: FACT-CHECK SWIPE GAME ===== -->
+    <div class="tab-panel" id="tab-game">
+
+        <header id="game-header">
+            <h1>희토류 팩트체크 스와이프 게임</h1>
+            <p>왼쪽(Fake/거짓) 또는 오른쪽(Real/진실)으로 카드를 밀어보세요!</p>
+        </header>
+
+        <div id="game-container">
+            <div id="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+
+            <div class="card-zone" id="card-zone">
+                </div>
+
+            <div class="controls" id="action-buttons">
+                <button class="btn btn-fake" onclick="handleChoice(true)">✕ FAKE (거짓)</button>
+                <button class="btn btn-real" onclick="handleChoice(false)">◯ REAL (진실)</button>
+            </div>
+
+            <button class="btn btn-next" id="btn-next" onclick="nextCard()">다음 카드로 넘어갑니다</button>
+
+            <div id="feedback-panel">
+                <div class="feedback-title" id="feedback-title">정답입니다!</div>
+                <div class="feedback-reason" id="feedback-reason">해설 설명 영역</div>
+            </div>
+        </div>
+
+        <div id="result-screen">
+            <h2>학습 완료!</h2>
+            <p>희토류의 유용한 지식을 마스터하셨습니다.</p>
+            <div class="score-box">
+                <span id="correct-count">0</span> / <span id="total-count">14</span>
+            </div>
+            <p style="color: var(--g-text-muted); margin-bottom: 25px;" id="result-evaluation"></p>
+            <button class="btn btn-restart" onclick="restartGame()">다시 도전하기</button>
+        </div>
+
+    </div>
+    <!-- ===== END TAB 2 ===== -->
+
+    <footer>
+        <p>Strategic Rare Earth Elements Dashboard &copy; 2026. Powered by <span>Pretendard & Orbitron</span></p>
+    </footer>
+
+    <script>
+        /* =========================================================
+           TAB SWITCHING
+           ========================================================= */
+        let gameStarted = false;
+
+        function switchMainTab(tab) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('btn-tab-' + tab).classList.add('active');
+
+            // 게임 탭을 처음 열 때만 게임을 초기화합니다 (불필요한 재시작 방지)
+            if (tab === 'game' && !gameStarted) {
+                gameStarted = true;
+                initGame();
+            }
+        }
+
+        /* =========================================================
+           DASHBOARD (TAB 1) LOGIC
+           ========================================================= */
+        const elementData = {
+            'sc': { name: '스칸듐 (Scandium)', desc: '매우 가볍고 녹는점이 높아 알루미늄 합금 등에 첨가하여 제트기 기체 구조나 첨단 스포츠 장비에 광범위하게 쓰입니다.', use: '항공우주 합금 소스' },
+            'y': { name: '이트륨 (Yttrium)', desc: '고온 초전도체나 특수 전자 레이저 빔 제조용 결정을 만드는 원료입니다. 전자 기기의 정밀 필터 성분으로 사용됩니다.', use: '고온 초전도체, 특수 레이저' },
+            'la': { name: '란타넘 (Lanthanum)', desc: '하이브리드 차량 배터리 및 정밀 카메라 렌즈 굴절률을 비약적으로 조절하기 위해 대량으로 쓰이는 원소입니다.', use: '정밀 렌즈, 배터리 촉매' },
+            'pr': { name: '프라세오디뮴 (Praseodymium)', desc: '자성을 높여주는 보조 원소로서 영구자석 성능 조율에 활용되며, 노란색 빛을 내는 항공 안전 특수 유리에 쓰입니다.', use: '보조 영구자석, 특수 착색제' },
+            'pm': { name: '프로메튬 (Promethium)', desc: '지구상에 오직 방사성 붕괴로만 극미량 존재하는 인공 원소로, 초소형 정밀 전지나 광도계의 부품 원료로 소량 쓰입니다.', use: '초소형 원자력 에너지 전지' },
+            'sm': { name: '사마륨 (Samarium)', desc: '초고온(섭씨 300도 이상) 환경에서도 자력을 잃지 않는 코발트-사마륨 고열 영구자석 제작의 대체할 수 없는 필수 핵심 광물입니다.', use: '고온 영구자석, 제어봉 소재' },
+            'eu': { name: '유로퓸 (Europium)', desc: '액정 디스플레이의 기판 내부에 들어가는 고출력 붉은색과 푸른색 인광 물질을 구성하는 정밀 광학 필수 성분입니다.', use: '디스플레이 발광 촉매' },
+            'gd': { name: '가돌리늄 (Gadolinium)', desc: '자기 공명 영상(MRI) 촬영 시 환자 몸 내부에 투여하는 핵심 무독성 조영제 구성 물질이자 정밀 원자력 제어용 흡수재입니다.', use: 'MRI 정밀 조영제, 원자로 제어' },
+            'dy': { name: '디스프로슘 (Dysprosium)', desc: '네오디뮴 자석의 물리적 한계점인 열 저항력을 비약적으로 증대시켜 주어, 초고열이 발생하는 고속 주행 전기차 내부 모터에 동시 사용됩니다.', use: '전기차 고온 극복용 영구자석' },
+            'ho': { name: '홀뮴 (Holmium)', desc: '현존하는 원소 중 강력한 자기 모멘트를 지녀, 첨단 마이크로파 통신 기기 필터 및 극정밀 레이저 수술 장비의 필수 소재입니다.', use: '정밀 통신 필터, 정형 레이저' },
+            'er': { name: '어븀 (Erbium)', desc: '전 세계 인터넷 속도를 대변하는 광섬유 네트워크 케이블의 내부 신호 증폭기 소재로 사용되어 대용량 정보 전달을 가속화합니다.', use: '광통신 케이블 신호 증폭기' },
+            'tm': { name: '툴륨 (Thulium)', desc: '휴대성이 극도로 우수한 컴팩트형 X선 방사선 의료기기 내부의 광원 소스로 활약하여 의료 진단의 편리성을 열었습니다.', use: '의료용 정밀 휴대용 X선 장비' },
+            'yb': { name: '이터븀 (Ytterbium)', desc: '고고학 연대 측정 분야나 고출력 금속 가공용 파이버 레이저의 활성 물질로서 파워를 급증시키는 보조 원소입니다.', use: '고성능 금속 가공용 파이버 레이저' },
+            'lu': { name: '루테튬 (Lutetium)', desc: '암 세포를 직접 추적하여 타격하는 첨단 표적 방사선 항암 치료 정밀 기술 및 정밀 실리콘 가공 분석에 필수로 꼽힙니다.', use: '방사선 표적 항암제, 핵물리 감지기' }
+        };
+
+        function showElement(code) {
+            document.querySelectorAll('.element-cell').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.detail-card').forEach(d => d.classList.remove('active'));
+
+            const clicked = Array.from(document.querySelectorAll('.element-cell')).find(cell => cell.getAttribute('onclick').includes(`'${code}'`));
+            if(clicked) clicked.classList.add('active');
+
+            if (code === 'ce') {
+                document.getElementById('detail-ce').classList.add('active');
+            } else if (code === 'nd') {
+                document.getElementById('detail-nd').classList.add('active');
+            } else if (code === 'tb') {
+                document.getElementById('detail-tb').classList.add('active');
+            } else {
+                const data = elementData[code];
+                document.getElementById('detail-other').classList.add('active');
+                document.getElementById('other-desc').innerText = data.desc;
+                document.getElementById('other-use').innerText = data.use;
+                document.querySelector('#detail-other .detail-title h3').innerText = data.name;
+                document.querySelector('#detail-other .detail-sym-box').innerText = code.toUpperCase();
+            }
+        }
+
+        const chartData = {
+            reserves: { china: 48, brazil: 23, australia: 10, others: 19 },
+            production: { china: 70, brazil: 2, australia: 15, others: 13 },
+            refining: { china: 92, brazil: 1, australia: 4, others: 3 }
+        };
+
+        function changeDataset(type) {
+            document.querySelectorAll('.chart-tab').forEach(tab => tab.classList.remove('active'));
+            const activeTab = Array.from(document.querySelectorAll('.chart-tab')).find(tab => tab.getAttribute('onclick').includes(type));
+            if (activeTab) activeTab.classList.add('active');
+
+            const selected = chartData[type];
+            animateBar('bar-fill-china', 'val-fill-china', selected.china);
+            animateBar('bar-fill-brazil', 'val-fill-brazil', selected.brazil);
+            animateBar('bar-fill-australia', 'val-fill-australia', selected.australia);
+            animateBar('bar-fill-others', 'val-fill-others', selected.others);
+        }
+
+        function animateBar(barId, valId, value) {
+            const bar = document.getElementById(barId);
+            const label = document.getElementById(valId);
+
+            bar.style.width = value + '%';
+
+            let start = 0;
+            const step = Math.ceil(value / 25);
+
+            clearInterval(bar.interval);
+            bar.interval = setInterval(() => {
+                start += step;
+                if (start >= value) {
+                    start = value;
+                    clearInterval(bar.interval);
+                }
+                label.innerText = start + '%';
+            }, 20);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            changeDataset('reserves');
+        });
+
+        /* =========================================================
+           GAME (TAB 2) LOGIC
+           ========================================================= */
+        const rawData = [
+            { "mineral": "[스칸듐(Sc)는 스마트폰, 스포츠 용품, 항공우주 부품에 이용된다.]", "isFake": false, "reason": "[스칸듐은스마트폰, 스포츠 용품, 항공우주 부품에 이용되며, 알루미늄과 합금하여 가볍고 매우 단단한 프레임을 만듭니다. 이를 절약하기 위해서는 안 쓰는 스마트폰과 소형 가전은 서랍에 방치하지 말고 전용 수거함에 배출해 재활용(도시광산)되도록 하고, 스칸듐 합금이 들어간 자전거, 야구 배트 등의 스포츠 용품은 오래 쓰고, 버릴 때 고철로 정확히 분리배출해야 합니다.]" },
+            { "mineral": "[이트륨(Y)는 스마트폰 및 전기차 배터리에 이용된다.]", "isFake": true, "reason": "[이트륨은 카메라 렌즈, TV/모니터 화면, LED 조명에 이용되며, 카메라 렌즈의 굴절률을 높이고, 디스플레이와 LED의 적색 형광체로 쓰입니다. 이를 절약하기 위해서는 LED 조명과 고장 난 TV·모니터는 이트륨 형광체 회수를 위해 폐가전 전용 수거함으로 배출하고, 카메라와 스마트폰의 사용 수명을 늘리고, 안 쓰는 기기는 중고 거래나 나눔으로 자원 순환을 도와야 합니다.]" },
+            { "mineral": "[란타넘(La)는 스마트폰 및 카메라 렌즈, 전기차 배터리에 이용된다.]", "isFake": false, "reason": "[란타넘은 스마트폰 및 카메라 렌즈, 전기차 배터리에 이용되며, 광학 유리의 굴절률을 높여 카메라 렌즈를 얇고 선명하게 만들며, 니켈-수소 배터리의 전극에 쓰입니다. 이를 절약하기 위해서는 카메라 렌즈와 배터리가 포함된 폐스마트폰 및 하이브리드 차량 배터리는 반드시 전용 수거함이나 대리점에 반납해 회수되도록 하고, 전자기기를 최대한 오래 사용하고, 쓰지 않는 기기는 중고 거래나 나눔으로 제품의 수명을 늘려 희토류 소비를 줄여야 합니다.]" },
+            { "mineral": "[세륨(Ce)는 원자력 전지, 정밀 계측기에 이용된다.]", "isFake": true, "reason": "[세륨은 스마트폰 화면(유리 연마제), 디스플레이용 특수 유리를 매끄깎아내는 정밀 연마제 및 자외선 차단 유리에 필수적입니다. 이를 절약하기 위해서는 세륨 연마제가 쓰인 스마트폰과 모니터는 액정이 깨지지 않게 보호 필름과 케이스를 씌워 기기 수명을 늘리고, 디스플레이 유리의 세륨 성분을 재활용할 수 있도록, 고장 난 스마트폰과 TV는 폐가전 전용 수거함에 배출해야 합니다.]" },
+            { "mineral": "[프라세오디뮴(Pr)은 스마트폰 스피커, 전기차 모터, 고강도 고글에 이용된다.]", "isFake": false, "reason": "[프라세오디뮴은스마트폰 스피커, 전기차 모터, 고강도 고글에 이용되며, 네오디뮴 자석의 강도를 보강하는 부품(영구자석)이나 특수 노란색 필터 유리에 쓰입니다. 이를 절약하기 위해서는 프라세오디뮴이 포함된 영구자석 회수를 위해 수명이 다한 스마트폰과 소형 가전은 반드시 폐가전 전용 수거함에 배출하고,  전기차나 에어컨 등 고성능 모터가 쓰인 대형 제품은 오래 사용하고, 폐기 시 지자체 공식 수거 서비스를 통해 자석을 재활용해야 합니다.]" },
+            { "mineral": "[사마륨(Sm)는 원자력 전지, 정밀 계측기에 이용된다.]", "isFake": false, "reason": "[사마륨은 원자력 전지, 정밀 계측기에 이용되며, 고온에서도 자력을 잃지 않는 '사마륨-코발트 자석'으로 제작되어 전자레인지나 고온 작동 모터에 쓰입니다. 이를 절약하기 위해서는 고온 자석이 쓰인 폐전자레인지나 고장 난 오븐은 무단 투기하지 말고 폐가전 무상방문수거 서비스를 통해 배출하고, 사마륨이 포함된 산업용 모터나 정밀 가전제품을 정기적으로 점검하고 관리하여 기기의 사용 수명을 최대한 늘려야 합니다.]" },
+            { "mineral": "[유로퓸(Eu)는 LED 조명, TV 및 스마트폰 디스플레이에 이용된다.]", "isFake": false, "reason": "[유로퓸은 LED 조명, TV 및 스마트폰 디스플레이에 이용되며, 적색과 청색을 내는 핵심 형광체로, 화면의 생생한 색감을 구현합니다. 이를 절약하기 위해서는 유로퓸 형광체를 회수하여 재활용할 수 있도록, 고장 난 TV, 모니터, LED 조명은 반드시 지정된 폐가전 수거함에 배출해야 하고, 디스플레이 화면의 밝기를 적절히 조절하고 타이머를 설정해 화면 켜짐 시간을 줄임으로써 기기와 형광체의 수명을 늘려야 합니다.]" },
+            { "mineral": "[가돌리늄(Gd)는LED 조명, 스마트폰 디스플레이에 이용된다.]", "isFake": true, "reason": "[가돌리늄은MRI 장비, 냉장고(미래형 자기냉각), 광디스크에 이용되며, 자성 특성이 독특하여 의료용 MRI 조영제나 차세대 친환경 자기냉각 냉장고의 냉매 대체재로 연구·쓰입니다. 이를 절약하기 위해서는 가돌리늄이 쓰인 광디스크나 폐냉장고는 무단 투기하지 않고 지자체 폐가전 수거 서비스를 통해 배출하여 금속을 회수하고, 조영제로 쓰이는 가돌리늄의 수질 오염을 막기 위해 병원 등 의료기관에서 의료폐기물 가이드라인에 맞춰 남은 약제를 철저히 회수해야 합니다.]" },
+            { "mineral": "[터븀(Tb)는  LED 조명, 스마트폰 디스플레이, 광자기 디스크에 이용된다.]", "isFake": false, "reason": "[터븀은  LED 조명, 스마트폰 디스플레이, 광자기 디스크에 이용되며, 녹색 형광체로 쓰여, 네오디뮴 자석이 고온에서도 견디게 하는 첨가제로 스마트폰 진동 모터 등에 쓰입니다. 이를 절약하기 위해서는 수명이 다한 스마트폰과 LED 조명은 소형 폐가전 전용 수거함에 배출하고, 터븀이 첨가된 고성능 모터 제품(전동공구 등)은 무리하게 과열시키지 않고 관리하여 제품 자체의 수명을 늘려 사용해야 합니다.]" },
+            { "mineral": "[홀뮴(Ho)는 광섬유 케이블 (인터넷 통신망)에 이용된다.]", "isFake": true, "reason": "[홀뮴은 레이저 치료기, 고자기장 자석에 이용되며, 아주 강력한 자력을 집중시키는 성질이 있어 의료용 레이저 기기나 특수 정밀 센서에 쓰입니다. 이를 절약하기 위해서는 홀뮴이 포함된 레이저 장비와 정밀 센서는 주기적인 정비와 부품 교체를 통해 기기 자체의 사용 수명을 최대한 늘리고, 폐기되는 의료 장비와 고강도 자석은 무단 방치하지 않고, 희귀 금속 전문 회수 업체를 통해 홀뮴을 분리·재활용해야 합니다.]" },
+            { "mineral": "[어븀(Er)는 광섬유 케이블 (인터넷 통신망)에 이용된다.]", "isFake": false, "reason": "[어븀은 광섬유 케이블 (인터넷 통신망)에 이용되며, 인터넷 신호를 증폭하는 광섬유 증폭기(EDFA)에 쓰여, 우리가 광속 인터넷을 쓸 수 있게 합니다. 이를 절약하기 위해서는 어븀이 쓰인 초고속 인터넷 광케이블망의 노후 부품 교체 시, 폐기된 광섬유 증폭기(EDFA)를 전문 통신장비 회수 업체를 통해 체계적으로 수거하고 정제해야 합니다.]" },
+            { "mineral": "[툴륨(Tm)는 광섬유 레이저, 태양광 발전 패널, 원자시계에 이용된다.]", "isFake": true, "reason": "[툴륨은휴대용 X-ray 기기, 레이저 치료기에 이용되며, 방사선 및 레이저 광원 역할을 하여 병원의 휴대용 진단 장비에 쓰입니다. 이를 절약하기 위해서는 장비의 오작동과 불필요한 마모를 막기 위해 철저하게 유지·보수하여 의료 기기의 내구연한을 극대화하고, 툴륨이 사용되는 휴대용 X-ray와 의료용 레이저 기기는 폐기 전 전문 업체를 통해 정밀 광원 부품을 안전하게 회수하고 정제해야 합니다.]" },
+            { "mineral": "[이터븀(Yb)는 의료용 PET 스캐너, 반도체 리소그래피에 이용된다.]", "isFake": true, "reason": "[이터븀은 광섬유 레이저, 태양광 발전 패널, 원자시계에 이용되며, 정밀 가공용 레이저나 태양전지의 효율을 높이는 첨가제로 쓰입니다. 이를 절약하기 위해서는 이터븀이 함유된 고효율 태양광 패널은 철거 시 폐기하지 않고, 태양광 패널 전문 재활용 처리 시설을 통해 이터븀 등 희귀 금속을 분리·회수해야 합니다.]" },
+            { "mineral": "[루테튬(Lu)는스마트폰, 스포츠 용품, 항공우주 부품에 이용된다.]", "isFake": true, "reason": "[루테튬은 의료용 PET 스캐너, 반도체 리소그래피에 이용되며, 밀도가 높은 신틸레이터(섬광체) 결정을 만들어 암 진단용 PET 가전/의료기기에 쓰입니다. 이를 절약하기 위해서는 루테튬이 포함된 고가의 PET 스캐너와 반도체 노광 장비는 폐기 시 전문 의료·정밀기기 재활용 업체를 통해 신틸레이터 결정을 안전하게 분리·회수하고, 장비의 센서와 광학 부품을 주기적으로 정비하여 기기 자체의 성능 유지 기간을 늘리고, 불필요한 조기 폐기를 방지해야 합니다.]" }
+        ];
+
+        const cleanText = (text) => text.replace(/[\[\]]/g, '');
+
+        let gameData = rawData.map(item => ({
+            mineral: cleanText(item.mineral),
+            isFake: Array.isArray(item.isFake) ? item.isFake[0] : item.isFake,
+            reason: cleanText(item.reason)
+        }));
+
+        let currentIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        let startX = 0;
+        let currentX = 0;
+        let activeCardElement = null;
+
+        const cardZone = document.getElementById('card-zone');
+        const feedbackPanel = document.getElementById('feedback-panel');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackReason = document.getElementById('feedback-reason');
+        const actionButtons = document.getElementById('action-buttons');
+        const btnNext = document.getElementById('btn-next');
+        const progressBar = document.getElementById('progress-bar');
+
+        function initGame() {
+            currentIndex = 0;
+            score = 0;
+            isAnswered = false;
+            document.getElementById('game-header').style.display = 'block';
+            document.getElementById('game-container').style.display = 'flex';
+            document.getElementById('result-screen').style.display = 'none';
+            showCard();
+        }
+
+        function showCard() {
+            cardZone.innerHTML = '';
+            feedbackPanel.classList.remove('visible');
+            actionButtons.style.display = 'flex';
+            btnNext.style.display = 'none';
+            isAnswered = false;
+
+            if (currentIndex >= gameData.length) {
+                endGame();
+                return;
+            }
+
+            const progressPercent = (currentIndex / gameData.length) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+
+            const currentItem = gameData[currentIndex];
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.id = 'current-card';
+
+            card.innerHTML = `
+                <div class="badge">원소 탐구 #${currentIndex + 1}</div>
+                <div class="statement">${currentItem.mineral}</div>
+            `;
+
+            cardZone.appendChild(card);
+            activeCardElement = card;
+
+            card.addEventListener('mousedown', dragStart);
+            card.addEventListener('touchstart', dragStart, { passive: true });
+        }
+
+        function dragStart(e) {
+            if (isAnswered) return;
+            startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+
+            document.addEventListener('mousemove', dragMove);
+            document.addEventListener('mouseup', dragEnd);
+            document.addEventListener('touchmove', dragMove, { passive: false });
+            document.addEventListener('touchend', dragEnd);
+        }
+
+        function dragMove(e) {
+            if (!activeCardElement || isAnswered) return;
+            if (e.type === 'touchmove') e.preventDefault();
+
+            currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            const diffX = currentX - startX;
+            const rotate = diffX * 0.08;
+
+            activeCardElement.style.transform = `translateX(${diffX}px) rotate(${rotate}deg)`;
+
+            if (diffX < -50) {
+                activeCardElement.style.borderColor = 'var(--g-danger)';
+            } else if (diffX > 50) {
+                activeCardElement.style.borderColor = 'var(--g-success)';
+            } else {
+                activeCardElement.style.borderColor = 'rgba(255,255,255,0.05)';
+            }
+        }
+
+        function dragEnd() {
+            document.removeEventListener('mousemove', dragMove);
+            document.removeEventListener('mouseup', dragEnd);
+            document.removeEventListener('touchmove', dragMove);
+            document.removeEventListener('touchend', dragEnd);
+
+            if (!activeCardElement || isAnswered) return;
+
+            const diffX = currentX - startX;
+            const threshold = 100;
+
+            if (diffX < -threshold) {
+                handleChoice(true);
+            } else if (diffX > threshold) {
+                handleChoice(false);
+            } else {
+                activeCardElement.style.transform = '';
+                activeCardElement.style.borderColor = 'rgba(255,255,255,0.05)';
+            }
+        }
+
+        function handleChoice(userChoice) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const currentItem = gameData[currentIndex];
+            const isCorrect = (userChoice === currentItem.isFake);
+
+            if (isCorrect) {
+                score++;
+                feedbackTitle.textContent = "✓ 정답입니다!";
+                feedbackTitle.className = "feedback-title correct";
+                activeCardElement.classList.add('react-correct');
+
+                if (userChoice) {
+                    activeCardElement.classList.add('swipe-left');
+                } else {
+                    activeCardElement.classList.add('swipe-right');
+                }
+            } else {
+                feedbackTitle.textContent = "✕ 오답입니다!";
+                feedbackTitle.className = "feedback-title wrong";
+                activeCardElement.classList.add('react-wrong');
+            }
+
+            feedbackReason.textContent = currentItem.reason;
+            feedbackPanel.classList.add('visible');
+
+            actionButtons.style.display = 'none';
+            btnNext.style.display = 'block';
+        }
+
+        function nextCard() {
+            currentIndex++;
+            showCard();
+        }
+
+        function endGame() {
+            progressBar.style.width = '100%';
+            document.getElementById('game-header').style.display = 'none';
+            document.getElementById('game-container').style.display = 'none';
+
+            const resultScreen = document.getElementById('result-screen');
+            resultScreen.style.display = 'block';
+
+            document.getElementById('correct-count').textContent = score;
+            document.getElementById('total-count').textContent = gameData.length;
+
+            const evaluation = document.getElementById('result-evaluation');
+            if (score === gameData.length) {
+                evaluation.textContent = "🏆 축하합니다! 완벽하게 마스터하셨네요! 우주급 희토류 지식인입니다.";
+            } else if (score >= 10) {
+                evaluation.textContent = "👍 아주 훌륭합니다! 희토류 자원 순환 지식인 인증 완료!";
+            } else {
+                evaluation.textContent = "🌱 조금 더 관심을 가져볼까요? 다시 복습하며 지구를 지키는 방법을 배워봅시다!";
+            }
+        }
+
+        function restartGame() {
+            initGame();
+        }
+
+        // 참고: 게임은 "게임" 탭을 처음 클릭할 때 initGame()이 호출되어 시작됩니다.
+        // (페이지 로드 시 자동으로 시작하지 않고, 탭을 열 때 시작하도록 변경했습니다.)
+    </script>
+</body>
+</html>
